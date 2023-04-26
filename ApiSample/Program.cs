@@ -36,7 +36,7 @@ namespace ApiSample
             var url = string.Empty;
             var key = string.Empty;
 
-            
+           
 
             if (url == string.Empty) url = "http://20.234.113.211:8101/";
             if (key == string.Empty) key = "1-cc3cd448-3f46-40e8-9159-3907be066ba6";
