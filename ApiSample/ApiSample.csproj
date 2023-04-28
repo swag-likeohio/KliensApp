@@ -123,6 +123,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\Hotcakes.CommerceDTO.v1.Catalog.ProductDTO.datasource" />
+    <None Include="Properties\DataSources\Termekek.datasource" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
