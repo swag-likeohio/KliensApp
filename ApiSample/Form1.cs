@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Hotcakes.CommerceDTO.v1;
@@ -72,62 +73,7 @@ namespace ApiSample
 
        
 
-        private void button2_Click(object sender, EventArgs e)
-        {
-            
-
-
-
-
-
-           
-
-            ////arak[valasztotttermek] = Decimal.Parse(textBox2.Text);
-
-
-            //var url = string.Empty;
-            //var key = string.Empty;
-
-            //if (url == string.Empty) url = "http://20.234.113.211:8101/";
-            //if (key == string.Empty) key = "1-cc3cd448-3f46-40e8-9159-3907be066ba6";
-
-            //var proxy = new Api(url, key);
-
-            //var snaps = proxy.ProductsFindAll();
-
-
-            //ProductDTO termek = new ProductDTO();
-
-            //termek = termekek[valasztotttermek];
-
-            //decimal ujar = Decimal.Parse(textBox3.Text);
-
-            //termek.SitePrice = ujar;
-
-            //ApiResponse<ProductDTO> valtozas = proxy.ProductsUpdate(termek);
-
-           
-
-            //snaps.Content[valasztotttermek].SitePrice = ujar;
-
-            //var ujtermek = new ProductDTO();
-
-            //ujtermek.ProductName = textBox2.Text;
-            //ujtermek.SitePrice = Decimal.Parse(textBox3.Text);
-            //ujtermek.Sku = textBox4.Text;
-            
-            
-          
-
-            //byte[] szam = new byte[3];
-
-            //ApiResponse<ProductDTO> hozzaad = proxy.ProductsCreate(ujtermek, szam);
-
-
-
-
-        }
-
+     
         private void button2_Click_1(object sender, EventArgs e)
         {
             var url = string.Empty;
@@ -154,19 +100,30 @@ namespace ApiSample
 
             ApiResponse<ProductDTO> valtozas = proxy.ProductsUpdate(kell);
 
+            MessageBox.Show("Sikeres mentés!");
 
 
+        }
 
+        private void textBox1_Validated(object sender, EventArgs e)
+        {
+            errorProvider1.SetError(textBox1, "");
+        }
+
+        private void textBox1_Validating(object sender, CancelEventArgs e)
+        {
+            if (!CheckUjAr(textBox1.Text))
+            {
+                e.Cancel = true;
+                errorProvider1.SetError(textBox1, "Érvénytelen ár");
+            }
+        }
+
+        private bool CheckUjAr(string beirt)
+        {
+           
+                return beirt.All(char.IsDigit);
             
-
-
-
-
-
-
-            //ApiResponse<ProductDTO> valtozas = proxy.ProductsUpdate(termek);
-
-
         }
     }
 }

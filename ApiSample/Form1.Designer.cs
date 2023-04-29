@@ -31,10 +31,10 @@
             this.components = new System.ComponentModel.Container();
             this.button1 = new System.Windows.Forms.Button();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.productDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.termekekBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.button2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.productDTOBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.bvinDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.skuDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.productNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -74,9 +74,12 @@
             this.storeIdDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isSearchableDataGridViewCheckBoxColumn = new System.Windows.Forms.DataGridViewCheckBoxColumn();
             this.shippingChargeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.termekekBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.productDTOBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.termekekBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).BeginInit();
             this.SuspendLayout();
             // 
             // button1
@@ -85,7 +88,7 @@
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(239, 90);
             this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
+            this.button1.Text = "Termékek lekérdezése";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -141,17 +144,17 @@
             this.dataGridView1.Size = new System.Drawing.Size(978, 375);
             this.dataGridView1.TabIndex = 10;
             // 
-            // termekekBindingSource
+            // productDTOBindingSource
             // 
-            this.termekekBindingSource.DataSource = typeof(ApiSample.Termekek);
+            this.productDTOBindingSource.DataSource = typeof(Hotcakes.CommerceDTO.v1.Catalog.ProductDTO);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(461, 65);
+            this.button2.Location = new System.Drawing.Point(933, 76);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(196, 80);
+            this.button2.Size = new System.Drawing.Size(104, 58);
             this.button2.TabIndex = 11;
-            this.button2.Text = "button2";
+            this.button2.Text = "Mentés";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
@@ -161,10 +164,8 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(100, 31);
             this.textBox1.TabIndex = 12;
-            // 
-            // productDTOBindingSource
-            // 
-            this.productDTOBindingSource.DataSource = typeof(Hotcakes.CommerceDTO.v1.Catalog.ProductDTO);
+            this.textBox1.Validating += new System.ComponentModel.CancelEventHandler(this.textBox1_Validating);
+            this.textBox1.Validated += new System.EventHandler(this.textBox1_Validated);
             // 
             // bvinDataGridViewTextBoxColumn
             // 
@@ -187,7 +188,7 @@
             // productNameDataGridViewTextBoxColumn
             // 
             this.productNameDataGridViewTextBoxColumn.DataPropertyName = "ProductName";
-            this.productNameDataGridViewTextBoxColumn.HeaderText = "ProductName";
+            this.productNameDataGridViewTextBoxColumn.HeaderText = "Termék neve";
             this.productNameDataGridViewTextBoxColumn.MinimumWidth = 10;
             this.productNameDataGridViewTextBoxColumn.Name = "productNameDataGridViewTextBoxColumn";
             this.productNameDataGridViewTextBoxColumn.Width = 200;
@@ -213,7 +214,7 @@
             // sitePriceDataGridViewTextBoxColumn
             // 
             this.sitePriceDataGridViewTextBoxColumn.DataPropertyName = "SitePrice";
-            this.sitePriceDataGridViewTextBoxColumn.HeaderText = "SitePrice";
+            this.sitePriceDataGridViewTextBoxColumn.HeaderText = "Ár";
             this.sitePriceDataGridViewTextBoxColumn.MinimumWidth = 10;
             this.sitePriceDataGridViewTextBoxColumn.Name = "sitePriceDataGridViewTextBoxColumn";
             this.sitePriceDataGridViewTextBoxColumn.Width = 200;
@@ -515,11 +516,25 @@
             this.shippingChargeDataGridViewTextBoxColumn.Visible = false;
             this.shippingChargeDataGridViewTextBoxColumn.Width = 200;
             // 
+            // errorProvider1
+            // 
+            this.errorProvider1.ContainerControl = this;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(670, 93);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(63, 25);
+            this.label1.TabIndex = 13;
+            this.label1.Text = "Új ár:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 25F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1471, 645);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.dataGridView1);
@@ -527,8 +542,9 @@
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.termekekBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.productDTOBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.termekekBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errorProvider1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -541,6 +557,7 @@
         private System.Windows.Forms.BindingSource termekekBindingSource;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.BindingSource productDTOBindingSource;
         private System.Windows.Forms.DataGridViewTextBoxColumn bvinDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn skuDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn productNameDataGridViewTextBoxColumn;
@@ -580,6 +597,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn storeIdDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewCheckBoxColumn isSearchableDataGridViewCheckBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn shippingChargeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.BindingSource productDTOBindingSource;
+        private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label label1;
     }
 }
