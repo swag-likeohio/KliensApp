@@ -18,7 +18,7 @@ namespace ApiSample
     public partial class Form1 : Form
     {
         List<ProductDTO> termekek = new List<ProductDTO>();
-       
+
         ProductDTO uj = new ProductDTO();
 
         public Form1()
