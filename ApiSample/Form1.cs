@@ -119,7 +119,7 @@ namespace ApiSample
             }
         }
 
-        private bool CheckUjAr(string beirt)
+        public bool CheckUjAr(string beirt)
         {
            
                 return beirt.All(char.IsDigit);
